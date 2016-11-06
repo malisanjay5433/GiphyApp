@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="lEq-Ua-TWd">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GiphyApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +17,122 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IZl-2h-OIx">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DCD-wD-2r7">
+                                    <size key="itemSize" width="200" height="200"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="4" minY="16" maxX="4" maxY="16"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="S1i-Vd-69m" customClass="Giphy_Cell" customModule="GiphyApp" customModuleProvider="target">
+                                        <rect key="frame" x="88" y="16" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ln1-al-PMm">
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ufo" translatesAutoresizingMaskIntoConstraints="NO" id="SPf-Nh-2og">
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="6GY-dh-ZI6"/>
+                                                                <constraint firstAttribute="width" constant="200" id="gvi-SN-1qz"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="SPf-Nh-2og" secondAttribute="bottom" id="5A0-UE-1Bq"/>
+                                                        <constraint firstItem="SPf-Nh-2og" firstAttribute="top" secondItem="ln1-al-PMm" secondAttribute="top" id="N84-MY-DfV"/>
+                                                        <constraint firstAttribute="trailing" secondItem="SPf-Nh-2og" secondAttribute="trailing" id="UUh-PF-qQT"/>
+                                                        <constraint firstItem="SPf-Nh-2og" firstAttribute="leading" secondItem="ln1-al-PMm" secondAttribute="leading" id="Y9F-Sf-zyi"/>
+                                                        <constraint firstAttribute="width" constant="200" id="cd7-KZ-pxz"/>
+                                                        <constraint firstAttribute="height" constant="200" id="jcT-Sb-Xs8"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="ln1-al-PMm" firstAttribute="leading" secondItem="S1i-Vd-69m" secondAttribute="leading" id="S0t-Y7-M9y"/>
+                                            <constraint firstItem="ln1-al-PMm" firstAttribute="top" secondItem="S1i-Vd-69m" secondAttribute="top" id="asd-6A-j8N"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="userImage" destination="SPf-Nh-2og" id="7Vg-qE-Mrt"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="IZl-2h-OIx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OGY-UR-4EA"/>
+                            <constraint firstAttribute="trailing" secondItem="IZl-2h-OIx" secondAttribute="trailing" id="W9B-wz-SQd"/>
+                            <constraint firstItem="IZl-2h-OIx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Zs0-gd-xfC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IZl-2h-OIx" secondAttribute="bottom" id="m3s-Ui-0H8"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="C8P-8Y-OhG"/>
+                    <connections>
+                        <outlet property="collectionView" destination="IZl-2h-OIx" id="jL0-h7-2gw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1079.2" y="137.18140929535232"/>
+        </scene>
+        <!--Detailed View Controller-->
+        <scene sceneID="B6O-jG-MUX">
+            <objects>
+                <viewController storyboardIdentifier="giphyData" id="QCg-kZ-8kf" customClass="DetailedViewController" customModule="GiphyApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XxR-zH-CMX"/>
+                        <viewControllerLayoutGuide type="bottom" id="c6v-DQ-q5o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RtF-eI-bHk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vi6-Sh-9j1"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vi6-Sh-9j1" firstAttribute="top" secondItem="RtF-eI-bHk" secondAttribute="top" id="EkN-dh-bPJ"/>
+                            <constraint firstItem="vi6-Sh-9j1" firstAttribute="leading" secondItem="RtF-eI-bHk" secondAttribute="leading" id="MRn-xd-97Y"/>
+                            <constraint firstAttribute="trailing" secondItem="vi6-Sh-9j1" secondAttribute="trailing" id="R3G-Ug-Gvw"/>
+                            <constraint firstItem="c6v-DQ-q5o" firstAttribute="top" secondItem="vi6-Sh-9j1" secondAttribute="bottom" id="nBM-IG-R1B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="vi6-Sh-9j1" id="Pfh-ig-qUd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jQY-V3-bNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1868" y="137.18140929535232"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="amj-MJ-4Lq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lEq-Ua-TWd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="T5P-pn-sTQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="WGh-kx-b6v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ZF-ah-fzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Ufo" width="325" height="350"/>
+    </resources>
 </document>
