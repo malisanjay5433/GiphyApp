@@ -9,15 +9,18 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate {
     var g_model = [GiphyModel]()
     @IBOutlet var collectionView:UICollectionView!
+    @IBOutlet var search_Bar:UITextField!
+
     let array = ["backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.title = "Giphy.com"
+        search_Bar.delegate = self
+//        self.navigationItem.title = "Giphy.com"
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView!.backgroundColor = UIColor.clear
@@ -25,26 +28,29 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         if let patternImage = UIImage(named: "Ufo") {
             view.backgroundColor = UIColor(patternImage: patternImage)
         }
-        makeRequestPost(searchText: "funny")
-        
-        
-        
+        makeRequestPost("funny")
+    
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.text == ""{
+            return
+        }
+       // self.search_Bar.text = textField.text!
+        makeRequestPost(textField.text!)
+        print("Searched Text:\(textField.text)")
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.returnKeyType = UIReturnKeyType.search
     }
 
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        
-//        let  cell = collectionView.cellForItem(at: indexPath)
-//        cell?.superview?.bringSubview(toFront: cell!)
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "DetailPage_Controller") as! DetailPage_Controller
-//        self.navigationController?.pushViewController(vc, animated: true)
-//        
-//    }
+    
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return g_model.count
     }
@@ -54,24 +60,12 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.backgroundColor = UIColor.white
         cell.layer.cornerRadius = 3.0
         cell.layer.masksToBounds = true
-      //  cell.userImage.layer.borderWidth = 1
         cell.userImage.layer.masksToBounds = false
         cell.userImage.layer.borderColor = UIColor.gray.cgColor
-//        cell.userImage.layer.cornerRadius = cell.userImage.frame.height/2
         cell.userImage.clipsToBounds = true
-//        cell.userImage.image = UIImage(named:"Ufo")
-//        //        let gif = giphy_model.gif_Url
-//        let gifURL : String = "http://media0.giphy.com/media/feqkVgjJpYtjy/200_d.gif"
-//        cell.userImage.image = UIImage.gifImageWithURL(gifURL)
-//        //        cell.userImage.sd_setImage(with: URL(string:gifURL))
-//        //        cell.userImage.sd_set
-//        //        cell.userImage.sd_setImage(with: <#T##URL!#>)
-//        cell.userName.text =  model.name[indexPath.row]
-//        
-        cell.userImage.image = UIImage(named:"noImage")
+        cell.userImage.image = UIImage(named:"ic_logo")
 
         DispatchQueue.global(qos: .default).async {
-
         let gifURL = giphy_model.gif_Url
         let imageURL = UIImage.gifImageWithURL(gifURL!)
             cell.userImage.image = imageURL
@@ -94,17 +88,17 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         //device screen size
         let width = UIScreen.main.bounds.size.width
         //calculation of cell size
-        return CGSize(width: ((width / 2) - 16)   , height: 200)
+        return CGSize(width: ((width / 2) - 16)   , height: 180)
     }
 
     
     
-    func makeRequestPost(searchText:String){
+    func makeRequestPost(_ searchText:String){
+        Loader.inst.startLoading()
         print("makesearch:\(searchText)")
         let key = "api_key="+"dc6zaTOxFJmzC"
         let encodingText = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let enCodingKey = key.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        
         let api = "http://api.giphy.com/v1/gifs/search?q=" + encodingText! + "&" + enCodingKey!
         print("api:\(api)")
         Alamofire.request(api,method:.get)
@@ -114,6 +108,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     return
                 }
                 
+//                self.g_model.removeAll()
                 if let json = response.data{
                     let json_Data = JSON(data:json)
                     print("JSONData:\(json_Data)")
@@ -121,6 +116,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 //                        self.total_count = json_Data["pagination","total_count"].int!
 //                        self.count = json_Data["pagination","count"].int!
                         let data = json_Data["data"].array!
+                        
+                        if data.count > 0 {
+                            self.g_model.removeAll(keepingCapacity: false)
+                        }
                         for i in data{
                             let giphy = GiphyModel(json:i)
                             self.g_model.append(giphy)
@@ -133,8 +132,9 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     //                    self.offset += self.limit
                     //                    print("offset,limit:\(self.offset,self.limit)")
                     self.collectionView?.reloadData()
+                    Loader.inst.endLoading()
+
                 })
         }
 }
 }
-

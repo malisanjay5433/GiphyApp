@@ -19,7 +19,6 @@ class GiphyModel{
         self.gif_Url = json["images","fixed_height_small","url"].string
         print("source_tld:\(source_tld)")
         print("Gif:\(gif_Url)")
-        
     }
-    
+
 }

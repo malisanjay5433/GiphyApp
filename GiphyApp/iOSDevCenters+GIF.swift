@@ -60,33 +60,57 @@ extension UIImage {
         return gifImageWithData(imageData)
     }
     
-    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+//    class func delayForImageAtIndex(_ index: Int, source: CGImageSource!) -> Double {
+//        var delay = 0.1
+//        
+//        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
+//        let gifProperties: CFDictionary = unsafeBitCast(
+//            CFDictionaryGetValue(cfProperties,
+//                Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
+//            to: CFDictionary.self)
+//        
+//        var delayObject: AnyObject = unsafeBitCast(
+//            CFDictionaryGetValue(gifProperties,
+//                Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
+//            to: AnyObject.self)
+//        if delayObject.doubleValue == 0 {
+//            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
+//                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
+//        }
+//        
+//        delay = delayObject as! Double
+//        
+//        if delay < 0.1 {
+//            delay = 0.1
+//        }
+//        
+//        return delay
+//    }
+    
+    class func delayForImageAtIndex(index: Int, source: CGImageSource!) -> Double {
         var delay = 0.1
         
-        let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil)
-        let gifProperties: CFDictionary = unsafeBitCast(
-            CFDictionaryGetValue(cfProperties,
-                Unmanaged.passUnretained(kCGImagePropertyGIFDictionary).toOpaque()),
-            to: CFDictionary.self)
-        
-        var delayObject: AnyObject = unsafeBitCast(
-            CFDictionaryGetValue(gifProperties,
-                Unmanaged.passUnretained(kCGImagePropertyGIFUnclampedDelayTime).toOpaque()),
-            to: AnyObject.self)
-        if delayObject.doubleValue == 0 {
-            delayObject = unsafeBitCast(CFDictionaryGetValue(gifProperties,
-                Unmanaged.passUnretained(kCGImagePropertyGIFDelayTime).toOpaque()), to: AnyObject.self)
+        guard let cfProperties = CGImageSourceCopyPropertiesAtIndex(source, index, nil) as? NSDictionary,
+            let gifProperties = cfProperties[kCGImagePropertyGIFDictionary as NSString] as? NSDictionary else {
+                return delay
         }
         
-        delay = delayObject as! Double
+        var delayTime = gifProperties[kCGImagePropertyGIFUnclampedDelayTime as NSString]
+        
+        if (delayTime as AnyObject).doubleValue == 0.0 {
+            delayTime = gifProperties[kCGImagePropertyGIFDelayTime as NSString]
+        }
+        
+        if let delayTime = delayTime {
+            delay = (delayTime as AnyObject).doubleValue
+        }
         
         if delay < 0.1 {
-            delay = 0.1
+            delay = 0.1 // Make sure they're not too fast
         }
         
         return delay
     }
-    
     class func gcdForPair(_ a: Int?, _ b: Int?) -> Int {
         var a = a
         var b = b
@@ -143,7 +167,7 @@ extension UIImage {
                 images.append(image)
             }
             
-            let delaySeconds = UIImage.delayForImageAtIndex(Int(i),
+            let delaySeconds = UIImage.delayForImageAtIndex(index: Int(i),
                 source: source)
             delays.append(Int(delaySeconds * 1000.0)) // Seconds to ms
         }

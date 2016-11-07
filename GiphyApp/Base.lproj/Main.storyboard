@@ -34,33 +34,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ln1-al-PMm">
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ufo" translatesAutoresizingMaskIntoConstraints="NO" id="SPf-Nh-2og">
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="200" id="6GY-dh-ZI6"/>
-                                                                <constraint firstAttribute="width" constant="200" id="gvi-SN-1qz"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="SPf-Nh-2og" secondAttribute="bottom" id="5A0-UE-1Bq"/>
-                                                        <constraint firstItem="SPf-Nh-2og" firstAttribute="top" secondItem="ln1-al-PMm" secondAttribute="top" id="N84-MY-DfV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="SPf-Nh-2og" secondAttribute="trailing" id="UUh-PF-qQT"/>
-                                                        <constraint firstItem="SPf-Nh-2og" firstAttribute="leading" secondItem="ln1-al-PMm" secondAttribute="leading" id="Y9F-Sf-zyi"/>
-                                                        <constraint firstAttribute="width" constant="200" id="cd7-KZ-pxz"/>
-                                                        <constraint firstAttribute="height" constant="200" id="jcT-Sb-Xs8"/>
-                                                    </constraints>
-                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XTB-jH-mf3"/>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="ln1-al-PMm" firstAttribute="leading" secondItem="S1i-Vd-69m" secondAttribute="leading" id="S0t-Y7-M9y"/>
-                                            <constraint firstItem="ln1-al-PMm" firstAttribute="top" secondItem="S1i-Vd-69m" secondAttribute="top" id="asd-6A-j8N"/>
+                                            <constraint firstAttribute="trailing" secondItem="XTB-jH-mf3" secondAttribute="trailing" id="X3Y-l4-axe"/>
+                                            <constraint firstItem="XTB-jH-mf3" firstAttribute="leading" secondItem="S1i-Vd-69m" secondAttribute="leading" id="Zjh-uL-1fs"/>
+                                            <constraint firstItem="XTB-jH-mf3" firstAttribute="top" secondItem="S1i-Vd-69m" secondAttribute="top" id="ifZ-BA-KvP"/>
+                                            <constraint firstAttribute="bottom" secondItem="XTB-jH-mf3" secondAttribute="bottom" id="ltY-aY-GRO"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="userImage" destination="SPf-Nh-2og" id="7Vg-qE-Mrt"/>
+                                            <outlet property="userImage" destination="XTB-jH-mf3" id="QRm-CW-O4X"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -74,9 +58,19 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IZl-2h-OIx" secondAttribute="bottom" id="m3s-Ui-0H8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="C8P-8Y-OhG"/>
+                    <navigationItem key="navigationItem" id="C8P-8Y-OhG">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search here" textAlignment="center" minimumFontSize="17" id="jBn-RJ-GQu">
+                            <rect key="frame" x="18" y="7" width="339" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="IZl-2h-OIx" id="jL0-h7-2gw"/>
+                        <outlet property="search_Bar" destination="jBn-RJ-GQu" id="BsP-ew-UXM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -132,7 +126,4 @@
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Ufo" width="325" height="350"/>
-    </resources>
 </document>
