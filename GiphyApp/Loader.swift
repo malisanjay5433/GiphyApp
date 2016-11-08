@@ -10,7 +10,7 @@ import UIKit
 import KRProgressHUD
 class Loader: NSObject {
    
-   let appColor = UIColor().HexToColor("47afd0")
+   let appColor = UIColor().HexToColor("e8445c")
     
    private static var __once: () = {
         Static.instance = Loader()

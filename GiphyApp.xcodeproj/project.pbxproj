@@ -14,8 +14,6 @@
 		3D788FE11DCF18C1005B8890 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D788FDF1DCF18C1005B8890 /* LaunchScreen.storyboard */; };
 		3D788FE91DCF19D8005B8890 /* Giphy_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D788FE81DCF19D8005B8890 /* Giphy_Cell.swift */; };
 		3D788FEB1DCF1E21005B8890 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D788FEA1DCF1E21005B8890 /* iOSDevCenters+GIF.swift */; };
-		3D788FED1DCF2062005B8890 /* funny.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3D788FEC1DCF2062005B8890 /* funny.gif */; };
-		3D788FEF1DCF2750005B8890 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D788FEE1DCF2750005B8890 /* DetailedViewController.swift */; };
 		3D788FF11DCF30F5005B8890 /* GiphyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D788FF01DCF30F5005B8890 /* GiphyModel.swift */; };
 		3D788FF91DD08E89005B8890 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D788FF81DD08E89005B8890 /* Loader.swift */; };
 		905B3AAE6E7F773FE42302C1 /* Pods_GiphyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8D57660AF97DA457A917E9 /* Pods_GiphyApp.framework */; };
@@ -32,10 +30,7 @@
 		3D788FE21DCF18C1005B8890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D788FE81DCF19D8005B8890 /* Giphy_Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Giphy_Cell.swift; sourceTree = "<group>"; };
 		3D788FEA1DCF1E21005B8890 /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
-		3D788FEC1DCF2062005B8890 /* funny.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = funny.gif; sourceTree = "<group>"; };
-		3D788FEE1DCF2750005B8890 /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		3D788FF01DCF30F5005B8890 /* GiphyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GiphyModel.swift; sourceTree = "<group>"; };
-		3D788FF21DD03BC0005B8890 /* GiphyApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GiphyApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D788FF81DD08E89005B8890 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		AB8D57660AF97DA457A917E9 /* Pods_GiphyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GiphyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6ED4F797AA428525FAECBF /* Pods-GiphyApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GiphyApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GiphyApp/Pods-GiphyApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,21 +78,58 @@
 		3D788FD51DCF18C1005B8890 /* GiphyApp */ = {
 			isa = PBXGroup;
 			children = (
-				3D788FF81DD08E89005B8890 /* Loader.swift */,
-				3D788FF01DCF30F5005B8890 /* GiphyModel.swift */,
-				3D788FEC1DCF2062005B8890 /* funny.gif */,
-				3D788FE81DCF19D8005B8890 /* Giphy_Cell.swift */,
-				3D788FEA1DCF1E21005B8890 /* iOSDevCenters+GIF.swift */,
-				3D788FD61DCF18C1005B8890 /* AppDelegate.swift */,
-				3D788FD81DCF18C1005B8890 /* ViewController.swift */,
-				3D788FDA1DCF18C1005B8890 /* Main.storyboard */,
+				3D7890041DD1EF0B005B8890 /* Cell */,
+				3D7890031DD1EEF3005B8890 /* Library */,
+				3D7890021DD1EECB005B8890 /* Controllers */,
+				3D7890011DD1EEC3005B8890 /* Model */,
+				3D7890001DD1EE21005B8890 /* View */,
 				3D788FDD1DCF18C1005B8890 /* Assets.xcassets */,
-				3D788FDF1DCF18C1005B8890 /* LaunchScreen.storyboard */,
 				3D788FE21DCF18C1005B8890 /* Info.plist */,
-				3D788FEE1DCF2750005B8890 /* DetailedViewController.swift */,
-				3D788FF21DD03BC0005B8890 /* GiphyApp-Bridging-Header.h */,
 			);
 			path = GiphyApp;
+			sourceTree = "<group>";
+		};
+		3D7890001DD1EE21005B8890 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3D788FDA1DCF18C1005B8890 /* Main.storyboard */,
+				3D788FDF1DCF18C1005B8890 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		3D7890011DD1EEC3005B8890 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D788FF81DD08E89005B8890 /* Loader.swift */,
+				3D788FF01DCF30F5005B8890 /* GiphyModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3D7890021DD1EECB005B8890 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D788FD61DCF18C1005B8890 /* AppDelegate.swift */,
+				3D788FD81DCF18C1005B8890 /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		3D7890031DD1EEF3005B8890 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				3D788FEA1DCF1E21005B8890 /* iOSDevCenters+GIF.swift */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		3D7890041DD1EF0B005B8890 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3D788FE81DCF19D8005B8890 /* Giphy_Cell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		69A2B8067D9A04DAC3494A9A /* Frameworks */ = {
@@ -173,7 +205,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D788FE11DCF18C1005B8890 /* LaunchScreen.storyboard in Resources */,
-				3D788FED1DCF2062005B8890 /* funny.gif in Resources */,
 				3D788FDE1DCF18C1005B8890 /* Assets.xcassets in Resources */,
 				3D788FDC1DCF18C1005B8890 /* Main.storyboard in Resources */,
 			);
@@ -236,7 +267,6 @@
 			files = (
 				3D788FD91DCF18C1005B8890 /* ViewController.swift in Sources */,
 				3D788FEB1DCF1E21005B8890 /* iOSDevCenters+GIF.swift in Sources */,
-				3D788FEF1DCF2750005B8890 /* DetailedViewController.swift in Sources */,
 				3D788FF11DCF30F5005B8890 /* GiphyModel.swift in Sources */,
 				3D788FE91DCF19D8005B8890 /* Giphy_Cell.swift in Sources */,
 				3D788FF91DD08E89005B8890 /* Loader.swift in Sources */,
@@ -370,7 +400,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.theiOSDeveloper.GiphyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GiphyApp/GiphyApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -387,7 +417,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.theiOSDeveloper.GiphyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GiphyApp/GiphyApp-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

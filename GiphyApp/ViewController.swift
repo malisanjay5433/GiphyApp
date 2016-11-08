@@ -9,39 +9,55 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate {
+import QuartzCore
+
+
+class ViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextFieldDelegate  {
+    var titleLabel = UILabel()
     var g_model = [GiphyModel]()
     @IBOutlet var collectionView:UICollectionView!
     @IBOutlet var search_Bar:UITextField!
-
+    let searchedResults = [String]()
+    var searchedText = "love bite"
     let array = ["backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage","Ufo","backImage"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+         congfig()
+         makeRequestPost()
+        
+    }
+    func congfig(){
         search_Bar.delegate = self
-//        self.navigationItem.title = "Giphy.com"
         collectionView.dataSource = self
         collectionView.delegate = self
+        self.search_Bar.isHidden = false
+        self.search_Bar.layer.borderColor = UIColor.white.cgColor
+        self.search_Bar.layer.borderWidth = 1
+        self.search_Bar.textColor = UIColor.white
+        self.search_Bar.layer.cornerRadius = 3.0
+        self.search_Bar.layer.masksToBounds = true
         collectionView!.backgroundColor = UIColor.clear
         collectionView!.contentInset = UIEdgeInsets(top: 16, left: 5, bottom: 10, right: 5)
         if let patternImage = UIImage(named: "Ufo") {
             view.backgroundColor = UIColor(patternImage: patternImage)
         }
-        makeRequestPost("funny")
-    
         
     }
+    
+    
+     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text == ""{
+            
             return
         }
-       // self.search_Bar.text = textField.text!
-        makeRequestPost(textField.text!)
+        makeRequestPost()
+        self.searchedText = textField.text!
         print("Searched Text:\(textField.text)")
         
     }
@@ -50,13 +66,23 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         textField.returnKeyType = UIReturnKeyType.search
     }
 
+//    override func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            loadSomeDataAndIncreaseDataLengthFunction()
+//            self.collectionView.reloadData()
+//        }
+//    }
     
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return g_model.count
     }
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath as IndexPath) as! Giphy_Cell
         let giphy_model = self.g_model[indexPath.row]
+        let back = cell.viewWithTag(3) as! UIButton
+        back.isHidden  = true
         cell.backgroundColor = UIColor.white
         cell.layer.cornerRadius = 3.0
         cell.layer.masksToBounds = true
@@ -64,6 +90,8 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         cell.userImage.layer.borderColor = UIColor.gray.cgColor
         cell.userImage.clipsToBounds = true
         cell.userImage.image = UIImage(named:"ic_logo")
+        self.search_Bar.placeholder = "Search here"
+
 
         DispatchQueue.global(qos: .default).async {
         let gifURL = giphy_model.gif_Url
@@ -73,14 +101,28 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "giphyData", sender: indexPath.row)
-        let giphy_model = self.g_model[indexPath.row]
+        _ = self.g_model[indexPath.row]
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.superview?.bringSubview(toFront: cell!)
+        UIView.animate(withDuration: 1.5, delay: 0.2, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:[], animations: { () -> Void in
+            cell?.frame = collectionView.bounds
+            collectionView.isScrollEnabled = false
+            let back = cell?.viewWithTag(3) as! UIButton
+            back.isHidden  = false
+            self.search_Bar.placeholder = "Giphy.com"
+            back.addTarget(self, action: #selector(ViewController.backToMainView), for: .touchUpInside)
+            }, completion: nil)
+    }
 
-        let vc = self.storyboard!.instantiateViewController(withIdentifier: "giphyData") as! DetailedViewController
-        vc.image = giphy_model.gif_Url
-        self.navigationController?.pushViewController(vc, animated: true)
-
+    func backToMainView(){
+        UIView.animate(withDuration: 1, delay: 0.2, usingSpringWithDamping: 1, initialSpringVelocity: 1, options:[], animations: { () -> Void in
+            
+        let indexPaths = self.collectionView!.indexPathsForSelectedItems! as [NSIndexPath]
+        self.collectionView.isScrollEnabled = true
+        self.collectionView.reloadItems(at: indexPaths as [IndexPath])
+        }, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -93,11 +135,10 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
 
     
     
-    func makeRequestPost(_ searchText:String){
+    func makeRequestPost(){
         Loader.inst.startLoading()
-        print("makesearch:\(searchText)")
         let key = "api_key="+"dc6zaTOxFJmzC"
-        let encodingText = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let encodingText = self.searchedText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let enCodingKey = key.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let api = "http://api.giphy.com/v1/gifs/search?q=" + encodingText! + "&" + enCodingKey!
         print("api:\(api)")
@@ -107,9 +148,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                     print(response.result.error!)
                     return
                 }
-                
-//                self.g_model.removeAll()
-                if let json = response.data{
+                                if let json = response.data{
                     let json_Data = JSON(data:json)
                     print("JSONData:\(json_Data)")
                     if json_Data["meta","status"] == 200{
@@ -124,13 +163,14 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
                             let giphy = GiphyModel(json:i)
                             self.g_model.append(giphy)
                         }
+                    
                         
                     }
                 }
                 DispatchQueue.main.async(execute: {
-                    //                    self.loadingMoreView?.stopAnimating()
-                    //                    self.offset += self.limit
-                    //                    print("offset,limit:\(self.offset,self.limit)")
+//                    self.loadingMoreView?.stopAnimating()
+//                    self.offset += self.limit
+//                    print("offset,limit:\(self.offset,self.limit)")
                     self.collectionView?.reloadData()
                     Loader.inst.endLoading()
 

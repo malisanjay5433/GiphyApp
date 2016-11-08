@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,14 +36,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XTB-jH-mf3"/>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SG-Ys-Rbq">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="9ot-F7-3gz"/>
+                                                        <constraint firstAttribute="width" constant="25" id="SkX-ZZ-gxF"/>
+                                                    </constraints>
+                                                    <state key="normal" image="back">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="XTB-jH-mf3" secondAttribute="trailing" id="X3Y-l4-axe"/>
                                             <constraint firstItem="XTB-jH-mf3" firstAttribute="leading" secondItem="S1i-Vd-69m" secondAttribute="leading" id="Zjh-uL-1fs"/>
+                                            <constraint firstItem="4SG-Ys-Rbq" firstAttribute="leading" secondItem="S1i-Vd-69m" secondAttribute="leadingMargin" id="iSZ-kW-T6r"/>
                                             <constraint firstItem="XTB-jH-mf3" firstAttribute="top" secondItem="S1i-Vd-69m" secondAttribute="top" id="ifZ-BA-KvP"/>
                                             <constraint firstAttribute="bottom" secondItem="XTB-jH-mf3" secondAttribute="bottom" id="ltY-aY-GRO"/>
+                                            <constraint firstItem="4SG-Ys-Rbq" firstAttribute="bottom" secondItem="S1i-Vd-69m" secondAttribute="bottomMargin" id="rJ7-wx-iT8"/>
                                         </constraints>
+                                        <size key="customSize" width="200" height="200"/>
                                         <connections>
                                             <outlet property="userImage" destination="XTB-jH-mf3" id="QRm-CW-O4X"/>
                                         </connections>
@@ -60,7 +73,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="C8P-8Y-OhG">
                         <nil key="title"/>
-                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search here" textAlignment="center" minimumFontSize="17" id="jBn-RJ-GQu">
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="center" minimumFontSize="17" id="jBn-RJ-GQu">
                             <rect key="frame" x="18" y="7" width="339" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
@@ -126,4 +139,7 @@
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="back" width="32" height="32"/>
+    </resources>
 </document>
