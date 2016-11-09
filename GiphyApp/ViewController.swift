@@ -46,7 +46,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         
         collectionView!.backgroundColor = UIColor.clear
         collectionView!.contentInset = UIEdgeInsets(top: 16, left: 5, bottom: 10, right: 5)
-        if let patternImage = UIImage(named: "background_Image") {
+        if let patternImage = UIImage(named: "Ufo") {
             view.backgroundColor = UIColor(patternImage: patternImage)
        }
         
@@ -139,9 +139,7 @@ class ViewController: UIViewController,UICollectionViewDelegate,UICollectionView
         let enCodingKey = key.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let limit =  "limit" + "=" + "\(self.limit)"
         let offset =  "offset" + "=" + "\(self.offset)"
-        print("from Sanjay SearchedText:\(self.searchedText)")
         let api = "http://api.giphy.com/v1/gifs/search?q=" + encodingText! + "&" + enCodingKey! + "&" + offset + "&"  + limit
-        print("api:\(api)")
         Alamofire.request(api,method:.get)
             .responseJSON { response in
                 guard response.result.error == nil else {

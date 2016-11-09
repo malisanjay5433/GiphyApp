@@ -11,6 +11,4 @@ import UIKit
 
 class Giphy_Cell: UICollectionViewCell {
     @IBOutlet weak var userImage:UIImageView!
-    @IBOutlet weak var userName:UILabel!
-    @IBOutlet weak var userSatatus:UILabel!
- }
+   }
