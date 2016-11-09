@@ -1,8 +1,8 @@
 //
-//  GroupCell.swift
-//  Giphy
+//  Giphy_Cell.swift
+//  GiphyApp
 //
-//  Created by Sanjay Mali on 02/11/16.
+//  Created by Sanjay Mali on 06/11/16.
 //  Copyright © 2016 Sanjay. All rights reserved.
 //
 
@@ -13,5 +13,4 @@ class Giphy_Cell: UICollectionViewCell {
     @IBOutlet weak var userImage:UIImageView!
     @IBOutlet weak var userName:UILabel!
     @IBOutlet weak var userSatatus:UILabel!
-    
-}
+ }

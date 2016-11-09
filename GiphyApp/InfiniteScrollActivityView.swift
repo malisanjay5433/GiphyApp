@@ -1,6 +1,10 @@
-
-
-
+//
+//  InfiniteScrollActivityView.swift
+//  GiphyApp
+//
+//  Created by Sanjay Mali on 06/11/16.
+//  Copyright © 2016 Sanjay. All rights reserved.
+//
 import Foundation
 import UIKit
 class InfiniteScrollActivityView: UIView {
@@ -10,7 +14,7 @@ class InfiniteScrollActivityView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupActivityIndicator()
-        self.backgroundColor = UIColor.orange
+        self.backgroundColor = UIColor.black
     }
     
     override init(frame aRect: CGRect) {
@@ -24,7 +28,7 @@ class InfiniteScrollActivityView: UIView {
     }
     
     func setupActivityIndicator() {
-        activityIndicatorView.activityIndicatorViewStyle = .gray
+        activityIndicatorView.activityIndicatorViewStyle = .whiteLarge
         activityIndicatorView.hidesWhenStopped = true
         self.addSubview(activityIndicatorView)
     }

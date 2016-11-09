@@ -1,11 +1,10 @@
 //
-//  ProgressIndicator.swift
-//  PropRes
+//  Loader.swift
+//  GiphyApp
 //
-//  Created by Sanjay Mali on 05/10/16.
+//  Created by Sanjay Mali on 06/11/16.
 //  Copyright © 2016 Sanjay. All rights reserved.
 //
-
 import UIKit
 import KRProgressHUD
 class Loader: NSObject {
